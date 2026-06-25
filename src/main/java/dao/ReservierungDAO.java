@@ -63,29 +63,6 @@ public class ReservierungDAO {
         }
     }
 
-    public List<Reservierung> alleReservierungen() throws SQLException {
-
-        List<Reservierung> liste = new ArrayList<>();
-
-        String sql = "SELECT * FROM Reservierung";
-
-        try(
-                Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()
-        ){
-            while(rs.next()){
-                liste.add(new Reservierung(
-                                rs.getInt("Reservierungsnummer"),
-                                rs.getString("Teilnehmer"),
-                                rs.getDate("Seminar_Datum"),
-                                rs.getTime("Seminar_Uhrzeit"))
-                );
-            }
-        }
-        return liste;
-    }
-
     public List<ReservierungsAnzeige> alleReservierungenMitNamen() throws SQLException {
 
         List<ReservierungsAnzeige> liste = new ArrayList<>();

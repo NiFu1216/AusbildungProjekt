@@ -56,6 +56,11 @@ for(ReservierungsAnzeige r : liste){
 %>
 
 </table>
+<br>
+
+<a href="index.jsp">
+Zurück zur Startseite
+</a>
 
 </body>
 </html>
