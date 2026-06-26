@@ -10,6 +10,47 @@
 
 <h1>Ausbildungszentrum</h1>
 
+<h3>
+
+Angemeldet als
+
+<%
+
+Boolean admin =
+(Boolean)
+session.getAttribute("admin");
+
+if(admin != null && admin){
+
+%>
+
+Administrator
+
+<%
+
+}else{
+
+%>
+
+<%=session.getAttribute("vorname")%>
+<%=session.getAttribute("nachname")%>
+
+<%
+}
+%>
+
+</h3>
+
+<br>
+
+<a href="logout">
+
+Logout
+
+</a>
+
+<hr>
+
 <ul>
 
     <li>

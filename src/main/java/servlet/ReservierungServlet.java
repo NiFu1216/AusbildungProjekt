@@ -38,8 +38,6 @@ public class ReservierungServlet extends HttpServlet {
             request.setAttribute("uhrzeit", uhrzeit);
             request.setAttribute("teilnehmer", teilnehmer);
 
-            session.invalidate();
-
             request.getRequestDispatcher("/reservierung.jsp").forward(request, response);
 
         } catch(Exception e){

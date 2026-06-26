@@ -3,27 +3,22 @@
 <%@ page import="model.Person" %>
 
 <html>
-
 <head>
-    <title>Teilnehmer auswählen</title>
+    <title>Anmeldung</title>
 </head>
 
 <body>
 
-<h2>Teilnehmer auswählen</h2>
+<h2>Anmeldung</h2>
 
-<form action="teilnehmer" method="post">
+<form action="login" method="post">
 
 <select name="svnr">
 
 <%
+List<Person> personen = (List<Person>) request.getAttribute("personen");
 
-List<Person> personen =
-(List<Person>)
-request.getAttribute("teilnehmerListe");
-
-for(Person p : personen){
-
+for (Person p : personen) {
 %>
 
 <option value="<%=p.getSvnr()%>">
@@ -36,23 +31,16 @@ for(Person p : personen){
 </option>
 
 <%
-
 }
-
 %>
 
 </select>
 
 <br><br>
 
-<button type="submit">
-
-Reservierung fortsetzen
-
-</button>
+<button>Anmelden</button>
 
 </form>
 
 </body>
-
 </html>

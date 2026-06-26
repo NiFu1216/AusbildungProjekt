@@ -116,4 +116,60 @@ public class ReservierungDAO {
         }
         return liste;
     }
+
+    public List<ReservierungsAnzeige> reservierungenVonTeilnehmer(String svnr) throws SQLException {
+
+        List<ReservierungsAnzeige> liste = new ArrayList<>();
+
+        String sql =
+                """
+                SELECT
+                    r.Reservierungsnummer,
+                    p.Vorname,
+                    p.Nachname,
+                    r.Seminar_Datum,
+                    r.Seminar_Uhrzeit,
+                    sk.Kurs_Name
+                FROM Reservierung r
+    
+                JOIN Teilnehmer t
+                    ON t.SVNr=r.Teilnehmer
+    
+                JOIN Person p
+                    ON p.SVNr=t.SVNr
+    
+                JOIN Seminar_Kurs sk
+                    ON sk.Seminar_Datum=
+                       r.Seminar_Datum
+    
+                   AND sk.Seminar_Uhrzeit=
+                       r.Seminar_Uhrzeit
+    
+                WHERE r.Teilnehmer=?
+    
+                ORDER BY
+                    r.Reservierungsnummer
+                """;
+
+        try(
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+        ){
+            ps.setString(1, svnr);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                liste.add(
+                        new ReservierungsAnzeige(
+                                rs.getInt("Reservierungsnummer"),
+                                rs.getString("Vorname"),
+                                rs.getString("Nachname"),
+                                rs.getString("Seminar_Datum"),
+                                rs.getString("Seminar_Uhrzeit"),
+                                rs.getString("Kurs_Name"))
+                );
+            }
+        }
+        return liste;
+    }
 }

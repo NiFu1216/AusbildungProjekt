@@ -14,13 +14,23 @@ public class TeilnehmerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        TeilnehmerDAO dao = new TeilnehmerDAO();
+        HttpSession session = request.getSession();
+        Boolean admin = (Boolean) session.getAttribute("admin");
 
         try {
-            request.setAttribute("teilnehmerListe", dao.getAlleTeilnehmer());
-            request.getRequestDispatcher("/teilnehmer.jsp").forward(request, response);
 
-        } catch(Exception e){
+            if (admin != null && admin) {
+
+                TeilnehmerDAO dao = new TeilnehmerDAO();
+                request.setAttribute("teilnehmerListe", dao.getAllePersonen());
+                request.getRequestDispatcher("/teilnehmer.jsp").forward(request, response);
+
+            } else {
+
+                session.setAttribute("teilnehmerSVNr", session.getAttribute("svnr"));
+                response.sendRedirect("reservierung");
+            }
+        } catch (Exception e) {
 
             request.setAttribute("fehlermeldung", e.getMessage());
             request.getRequestDispatcher("/fehler.jsp").forward(request, response);
