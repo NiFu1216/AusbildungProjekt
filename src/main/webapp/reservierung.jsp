@@ -1,10 +1,19 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
+<head>
+    <title>Reservierung</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
 <body>
+
+<div class="container">
 
 <h2>Reservierung erfolgreich</h2>
 
+<br>
+
+<div class="reservation-container"
 <p>
 Reservierungsnummer:
 ${nummer}
@@ -34,12 +43,15 @@ ${uhrzeit}
 Teilnehmer:
 ${teilnehmer}
 </p>
+</div>
 
 <br>
 
-<a href="index.jsp">
+<a href="startseite.jsp">
 Zurück
 </a>
+
+</div>
 
 </body>
 </html>

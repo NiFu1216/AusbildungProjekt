@@ -22,7 +22,7 @@ public class TeilnehmerServlet extends HttpServlet {
             if (admin != null && admin) {
 
                 TeilnehmerDAO dao = new TeilnehmerDAO();
-                request.setAttribute("teilnehmerListe", dao.getAllePersonen());
+                request.setAttribute("teilnehmerListe", dao.getAlleTeilnehmer());
                 request.getRequestDispatcher("/teilnehmer.jsp").forward(request, response);
 
             } else {

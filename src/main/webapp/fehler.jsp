@@ -3,9 +3,12 @@
 <html>
 <head>
     <title>Fehler</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
+
+<div class="container">
 
 <h2>Ein Fehler ist aufgetreten</h2>
 
@@ -15,9 +18,11 @@ ${fehlermeldung}
 
 <br>
 
-<a href="index.jsp">
+<a href="startseite.jsp">
 Zurück zur Startseite
 </a>
+
+</div>
 
 </body>
 </html>

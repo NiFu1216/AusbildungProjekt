@@ -172,4 +172,64 @@ public class ReservierungDAO {
         }
         return liste;
     }
+
+    public boolean hatBereitsSeminarGebucht(String teilnehmerSVNr, Date datum, Time zeit) {
+
+        String sql =
+                """
+                SELECT *
+                FROM Reservierung
+                WHERE Teilnehmer = ?
+                AND Seminar_Datum = ?
+                AND Seminar_Uhrzeit = ?
+                """;
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+                ) {
+
+            ps.setString(1, teilnehmerSVNr);
+            ps.setDate(2, datum);
+            ps.setTime(3, zeit);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean istTeilnehmer(String svnr) {
+
+        String sql =
+                """
+                SELECT *
+                FROM Teilnehmer
+                WHERE SVNr = ?
+                """;
+
+        try (
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)
+                ) {
+
+            ps.setString(1, svnr);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

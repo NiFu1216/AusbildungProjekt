@@ -27,6 +27,19 @@ public class ReservierungServlet extends HttpServlet {
 
         try {
             ReservierungDAO dao = new ReservierungDAO();
+
+            if (dao.hatBereitsSeminarGebucht(teilnehmer, Date.valueOf(datum), Time.valueOf(uhrzeit))) {
+                request.setAttribute("fehlermeldung", "Es existiert bereits eine Reservierung für dieses Seminar");
+                request.getRequestDispatcher("/fehler.jsp").forward(request, response);
+                return;
+            }
+
+            if (!dao.istTeilnehmer(teilnehmer)) {
+                request.setAttribute("fehlermeldung", "Sie sind kein Teilnehmer! Nur Teilnehmer dürfen Seminare buchen!");
+                request.getRequestDispatcher("/fehler.jsp").forward(request, response);
+                return;
+            }
+
             int nummer = dao.naechsteNummer();
             Reservierung r = new Reservierung(nummer, teilnehmer, Date.valueOf(datum), Time.valueOf(uhrzeit));
             dao.reservieren(r);

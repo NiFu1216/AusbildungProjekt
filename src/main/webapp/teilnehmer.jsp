@@ -6,13 +6,16 @@
 
 <head>
     <title>Teilnehmer auswählen</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
 
+<div class="container">
+
 <h2>Teilnehmer auswählen</h2>
 
-<form action="teilnehmer" method="post">
+<form action="teilnehmer" method="post" class="input-select">
 
 <select name="svnr">
 
@@ -43,15 +46,17 @@ for(Person p : personen){
 
 </select>
 
-<br><br>
+<br>
 
-<button type="submit">
+<button type="submit" class="btn">
 
 Reservierung fortsetzen
 
 </button>
 
 </form>
+
+</div>
 
 </body>
 

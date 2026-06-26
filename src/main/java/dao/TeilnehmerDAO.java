@@ -43,6 +43,42 @@ public class TeilnehmerDAO {
         return liste;
     }
 
+    public List<Person> getAlleTeilnehmer() {
+
+        List<Person> liste = new ArrayList<>();
+
+        String sql =
+                """
+                SELECT p.SVNr, p.Nachname, p.Vorname, p.Postleitzahl, p.Ort, p.Strasse, p.Hausnummer
+                FROM Person p
+                JOIN Teilnehmer t
+                ON p.SVNr = t.SVNr
+                ORDER BY Nachname, Vorname
+                """;
+
+        try(
+                Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+            while(rs.next()){
+                liste.add(
+                        new Person (
+                                rs.getString("SVNr"),
+                                rs.getString("Vorname"),
+                                rs.getString("Nachname"),
+                                rs.getString("Postleitzahl"),
+                                rs.getString("Ort"),
+                                rs.getString("Strasse"),
+                                rs.getString("Hausnummer"))
+                );
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return liste;
+    }
+
     public Person findePerson(String svnr){
 
         String sql =

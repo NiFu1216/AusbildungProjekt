@@ -5,15 +5,18 @@
 <html>
 <head>
     <title>Anmeldung</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
 
+<div class="container">
 <h2>Anmeldung</h2>
+<br>
 
-<form action="login" method="post">
+<form action="login" method="post" class="input-select">
 
-<select name="svnr">
+<select name="svnr" class="input-select">
 
 <%
 List<Person> personen = (List<Person>) request.getAttribute("personen");
@@ -36,11 +39,13 @@ for (Person p : personen) {
 
 </select>
 
-<br><br>
+<br>
 
-<button>Anmelden</button>
+<button class="btn">Anmelden</button>
 
 </form>
+
+</div>
 
 </body>
 </html>

@@ -4,9 +4,12 @@
 
 <head>
     <title>Ausbildungszentrum</title>
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
+
+<div class="container">
 
 <h1>Ausbildungszentrum</h1>
 
@@ -66,6 +69,8 @@ Logout
     </li>
 
 </ul>
+
+</div>
 
 </body>
 

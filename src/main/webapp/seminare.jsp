@@ -1,12 +1,18 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
+<head>
+    <title>Seminar</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
 <body>
+
+<div class="container-big">
 
 <h2>Seminar suchen</h2>
 
-<form action="seminare"
-      method="post">
+<form action="seminare" method="post" class="input-select">
 
     Kurs:
 
@@ -54,11 +60,13 @@
 
     <br><br>
 
-    <button type="submit">
+    <button type="submit" class="btn">
         Weiter
     </button>
 
 </form>
+
+</div>
 
 </body>
 </html>

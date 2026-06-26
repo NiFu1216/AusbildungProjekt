@@ -3,11 +3,18 @@
 <%@ page import="model.ReservierungsAnzeige" %>
 
 <html>
+<head>
+    <title>Reservierungen</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
 <body>
+
+<div class="container-big">
 
 <h2>Alle Reservierungen</h2>
 
-<table border="1">
+<table border="1" class="table">
 
 <tr>
     <th>Nr</th>
@@ -58,9 +65,11 @@ for(ReservierungsAnzeige r : liste){
 </table>
 <br>
 
-<a href="index.jsp">
+<a href="startseite.jsp">
 Zurück zur Startseite
 </a>
+
+</div>
 
 </body>
 </html>

@@ -3,11 +3,18 @@
 <%@ page import="model.Seminar" %>
 
 <html>
+<head>
+    <title>Seminar</title>
+    <link rel="stylesheet" href="style/style.css">
+</head>
+
 <body>
+
+<div class="container-big">
 
 <h2>Seminar auswählen</h2>
 
-<form action="seminarAuswahl" method="post">
+<form action="seminarAuswahl" method="post" class="input-select">
 
 <%
 List<Seminar> seminare =
@@ -17,6 +24,7 @@ List<Seminar> seminare =
 for(Seminar s : seminare){
 %>
 
+<label class="radio-option">
 <input type="radio"
        name="seminar"
        value="<%=s.getDatum()%>|<%=s.getUhrzeit()%>"
@@ -27,6 +35,7 @@ for(Seminar s : seminare){
 <%=s.getDatum()%>
 |
 <%=s.getUhrzeit()%>
+</label>
 
 <input type="hidden"
        name="uhrzeit"
@@ -40,11 +49,17 @@ for(Seminar s : seminare){
 
 <br>
 
-<button type="submit">
+<button type="submit" class="btn">
 Weiter
 </button>
 
+<br><br>
+
+<a href="startseite.jsp">Zur Startseite</a>
+
 </form>
+
+</div>
 
 </body>
 </html>
