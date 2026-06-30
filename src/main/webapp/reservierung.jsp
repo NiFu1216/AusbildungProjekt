@@ -48,7 +48,7 @@ ${teilnehmer}
 <br>
 
 <a href="startseite.jsp">
-Zurück
+Zurück zur Startseite
 </a>
 
 </div>

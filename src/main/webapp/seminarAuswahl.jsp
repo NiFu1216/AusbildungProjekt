@@ -37,10 +37,6 @@ for(Seminar s : seminare){
 <%=s.getUhrzeit()%>
 </label>
 
-<input type="hidden"
-       name="uhrzeit"
-       value="<%=s.getUhrzeit()%>">
-
 <br>
 
 <%
