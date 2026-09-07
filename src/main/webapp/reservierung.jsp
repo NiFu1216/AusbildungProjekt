@@ -13,7 +13,7 @@
 
 <br>
 
-<div class="reservation-container"
+<div class="reservation-container">
 <p>
 Reservierungsnummer:
 ${nummer}

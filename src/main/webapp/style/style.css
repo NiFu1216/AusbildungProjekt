@@ -135,12 +135,11 @@ select {
     width: 100%;
     padding: 10px 12px;
     font-size: 15px;
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* Standard Rand statt dicker schwarzer Linie */
     border-radius: 6px;
     background-color: white;
     box-sizing: border-box;
     cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 select:hover {

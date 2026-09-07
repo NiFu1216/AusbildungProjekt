@@ -11,64 +11,70 @@
 
 <div class="container">
 
-<h1>Ausbildungszentrum</h1>
+    <h1>Ausbildungszentrum</h1>
 
-<h3>
+    <h3>
 
-Angemeldet als
+        Angemeldet als
 
-<%
+        <%
+            Boolean admin = (Boolean) session.getAttribute("admin");
 
-Boolean admin =
-(Boolean)
-session.getAttribute("admin");
+            if(admin != null && admin){
+        %>
 
-if(admin != null && admin){
+        Administrator
 
-%>
+        <%
+        }else if(session.getAttribute("vorname") != null){
+        %>
 
-Administrator
+        <%=session.getAttribute("vorname")%>
+        <%=session.getAttribute("nachname")%>
 
-<%
+        <%
+        }else{
+        %>
 
-}else{
+        Gast
 
-%>
+        <%
+            }
+        %>
 
-<%=session.getAttribute("vorname")%>
-<%=session.getAttribute("nachname")%>
+    </h3>
 
-<%
-}
-%>
+    <br>
 
-</h3>
+    <a href="logout">
+        Logout
+    </a>
 
-<br>
+    <hr>
 
-<a href="logout">
+    <ul>
 
-Logout
+        <li>
+            <a href="seminare">
+                Seminar reservieren
+            </a>
+        </li>
 
-</a>
+        <li>
+            <a href="reservierungen">
+                Reservierungen anzeigen
+            </a>
+        </li>
 
-<hr>
+        <% if(admin != null && admin) { %>
+        <li>
+            <a href="kunden">
+                Kundenverwaltung
+            </a>
+        </li>
+        <% } %>
 
-<ul>
-
-    <li>
-        <a href="seminare">
-            Seminar reservieren
-        </a>
-    </li>
-
-    <li>
-        <a href="reservierungen">
-            Reservierungen anzeigen
-        </a>
-    </li>
-
-</ul>
+    </ul>
 
 </div>
 

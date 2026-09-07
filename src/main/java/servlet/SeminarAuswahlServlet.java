@@ -26,7 +26,7 @@ public class SeminarAuswahlServlet extends HttpServlet {
             request.getRequestDispatcher("/seminarAuswahl.jsp").forward(request, response);
 
         } catch (Exception e) {
-            if(kurs == null || sprache == null){
+            if (kurs == null || sprache == null) {
 
                 request.setAttribute("fehlermeldung", "Session abgelaufen.");
                 request.getRequestDispatcher("/fehler.jsp").forward(request, response);
@@ -35,16 +35,27 @@ public class SeminarAuswahlServlet extends HttpServlet {
                 request.setAttribute("fehlermeldung", e.getMessage());
                 request.getRequestDispatcher("/fehler.jsp").forward(request, response);
             }
-        }
-    }
+        }}
+            @Override
+            protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+                String seminarIdParam = req.getParameter("seminarId");
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+                // Prüfen, ob eine Auswahl getroffen wurde
+                if (seminarIdParam == null || seminarIdParam.isEmpty()) {
+                    // Falls nichts ausgewählt wurde, zurück zur Auswahl oder Fehler abfangen
+                    req.setAttribute("fehler", "Bitte wähle ein Seminar aus!");
+                    req.getRequestDispatcher("/seminarAuswahl.jsp").forward(req, resp);
+                    return;
+                }
 
-        HttpSession session = request.getSession();
-        String[] teile = request.getParameter("seminar").split("\\|");
-        session.setAttribute("datum", teile[0]);
-        session.setAttribute("uhrzeit", teile[1]);
-        response.sendRedirect("teilnehmer");
-    }
+                try {
+                    int seminarId = Integer.parseInt(seminarIdParam);
+                    HttpSession session = req.getSession();
+                    session.setAttribute("gewaehltesSeminarId", seminarId);
+
+                    resp.sendRedirect(req.getContextPath() + "/reservierung");
+                } catch (NumberFormatException e) {
+                    resp.sendRedirect(req.getContextPath() + "/seminare");
+                }
+            }
 }
