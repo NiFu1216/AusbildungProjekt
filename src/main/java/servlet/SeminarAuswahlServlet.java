@@ -36,26 +36,38 @@ public class SeminarAuswahlServlet extends HttpServlet {
                 request.getRequestDispatcher("/fehler.jsp").forward(request, response);
             }
         }}
-            @Override
-            protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-                String seminarIdParam = req.getParameter("seminarId");
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
-                // Prüfen, ob eine Auswahl getroffen wurde
-                if (seminarIdParam == null || seminarIdParam.isEmpty()) {
-                    // Falls nichts ausgewählt wurde, zurück zur Auswahl oder Fehler abfangen
-                    req.setAttribute("fehler", "Bitte wähle ein Seminar aus!");
-                    req.getRequestDispatcher("/seminarAuswahl.jsp").forward(req, resp);
-                    return;
-                }
+        HttpSession session = request.getSession();
+        String seminarParam = request.getParameter("seminar");
 
-                try {
-                    int seminarId = Integer.parseInt(seminarIdParam);
-                    HttpSession session = req.getSession();
-                    session.setAttribute("gewaehltesSeminarId", seminarId);
+        // 1. Prüfen, ob überhaupt eine Auswahl getroffen wurde
+        if (seminarParam == null || seminarParam.isEmpty()) {
+            request.setAttribute("fehlermeldung", "Bitte wählen Sie ein Seminar aus.");
+            request.getRequestDispatcher("/fehler.jsp").forward(request, response);
+            return;
+        }
 
-                    resp.sendRedirect(req.getContextPath() + "/reservierung");
-                } catch (NumberFormatException e) {
-                    resp.sendRedirect(req.getContextPath() + "/seminare");
-                }
-            }
+        try {
+            // Parameter aufspalten (z. B. "2026-09-01|09:00:00")
+            String[] teile = seminarParam.split("\\|");
+            String datum = teile[0];
+            String uhrzeit = teile[1];
+
+            // Daten in der Session speichern für das spätere ReservierungServlet
+            session.setAttribute("datum", datum);
+            session.setAttribute("uhrzeit", uhrzeit);
+
+            // Weiterleitung zur eigentlichen Buchung / Reservierung
+            response.sendRedirect("reservierung");
+
+        } catch (Exception e) {
+            // Im Fehlerfall NIEMALS unvorbereitet an seminarAuswahl.jsp leiten,
+            // sondern kontrolliert an fehler.jsp:
+            request.setAttribute("fehlermeldung", "Fehler bei der Seminarauswahl: " + e.getMessage());
+            request.getRequestDispatcher("/fehler.jsp").forward(request, response);
+        }
+    }
 }
